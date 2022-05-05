@@ -7,8 +7,15 @@ module.exports = (Ferdium, settings) => {
         'span.screenReaderOnly',
       );
       for (const child of allScreenReaders) {
-        if (child.previousSibling) {
-          unreadCount += Ferdium.safeParseInt(child.previousSibling.textContent);
+        if (
+          child.previousSibling &&
+          child?.parentElement?.parentElement?.parentElement?.firstChild?.firstChild?.getAttribute(
+            'data-icon-name',
+          ) !== 'NoteRegular'
+        ) {
+          unreadCount += Ferdium.safeParseInt(
+            child.previousSibling.textContent,
+          );
         }
       }
     }
